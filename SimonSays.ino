@@ -65,6 +65,7 @@ LiquidCrystal lcd( 8, 9, 4, 5, 6, 7 );   //Pins for the freetronics 16x2 LCD shi
 void setup() {
   Serial.begin(9600);
 
+  //get a random seed from the voltage reading in pin 1
   randomSeed(analogRead(1));
 
   //button adc input
@@ -76,7 +77,7 @@ void setup() {
   //set up the LCD number of columns and rows:
   lcd.begin( 16, 2 );
 
-  // welcoming message
+  // welcome message
   lcd.setCursor(2, 0);
   lcd.print("WELCOME TO:");
   lcd.setCursor(2, 1);
@@ -121,7 +122,7 @@ void PrintArray() {
       lcd.setCursor(14, 0);
       lcd.write(UP);
     }
-    else if (arr[i] == 2)
+    if (arr[i] == 2)
     {
       lcd.setCursor(14, 1);
       lcd.write(SELD);
@@ -129,7 +130,7 @@ void PrintArray() {
       lcd.setCursor(14, 1);
       lcd.write(DOWN);
     }
-    else if (arr[i] == 3)
+    if (arr[i] == 3)
     {
       lcd.setCursor(15, 1);
       lcd.write(SELR);
@@ -137,7 +138,7 @@ void PrintArray() {
       lcd.setCursor(15, 1);
       lcd.write(RIGHT);
     }
-    else if (arr[i] == 4)
+    if (arr[i] == 4)
     {
       lcd.setCursor(13, 1);
       lcd.write(SELL);
@@ -268,6 +269,7 @@ void loop() {
   lcd.setCursor(13, 1);
   lcd.write(LEFT);
 
+
   //get the latest button pressed, also the buttonJustPressed, buttonJustReleased flags
   button = ReadButtons();
   //blank the demo text line if a new button is pressed or released, ready for a new label to be written
@@ -288,7 +290,8 @@ void loop() {
     StoreUserArray(3);
     Compare();
   }
-  else if (button == BUTTON_LEFT)
+  
+  if (button == BUTTON_LEFT)
   {
     //Selection Display Animation
     lcd.setCursor(0, 1);
@@ -299,7 +302,8 @@ void loop() {
     StoreUserArray(4);
     Compare();
   }
-  else if (button == BUTTON_UP)
+  
+  if (button == BUTTON_UP)
   {
     //Selection Display Animation
     lcd.setCursor(1, 0);
@@ -310,7 +314,8 @@ void loop() {
     StoreUserArray(1);
     Compare();
   }
-  else if (button == BUTTON_DOWN)
+  
+  if (button == BUTTON_DOWN)
   {
     //Selection Display Animation
     lcd.setCursor(1, 2);
@@ -321,7 +326,8 @@ void loop() {
     StoreUserArray(2);
     Compare();
   }
-  else if (button == BUTTON_SELECT)
+  
+  if (button == BUTTON_SELECT)
     PrintArray();
 
   //clear the buttonJustPressed or buttonJustReleased flags, they've already done their job now.
